@@ -1,0 +1,28 @@
+/* border-box model for all elements */
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+/* --- Page color styling --- */
+
+:root {
+    --color-background-main-1: #e7cfaa;
+    --color-background-main-2: #f9f3ee;
+    --color-background-main-3: #ffffff;
+    --color-background-popup-1: #e7cfaab7;
+    --color-background-disabled-1: #ececec;
+    --color-invalid: #ff0000;
+    --color-main-font-1: #d9aa63;
+    --color-main-font-2: #2b1811;
+}
+
+/* ---------------------------------- */
+
+body {
+    background-color: var(--color-background-main-1);
+}
