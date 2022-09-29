@@ -28,11 +28,19 @@ body {
     background-color: var(--color-bg-main-1);
 }
 
-body.opened-popup {
+body.opened-menu {
     overflow-y: hidden;
 }
 
+.graphic, img {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+
 .container-centered {
+    max-width: 1440px;
     min-width: 1440px;
     margin: 0 auto;
     background-color: var(--color-bg-main-2);
@@ -44,6 +52,10 @@ header {
     align-items: center;
     height: 100px;
     position: sticky;
+}
+
+h1 {
+    text-align: center;
 }
 
 .menu-button {
@@ -87,8 +99,32 @@ nav.opened-menu {
 
 main.container-centered {
     background-color: var(--color-bg-main-4);
-    min-height: 90vh;
 }
+
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 280px;
+    height: 320px;
+    background-color: royalblue;
+    margin: 15px;
+}
+
+.card, .card img {
+    border-radius: 25px;
+}
+
+.card p {
+    font-size: 2em;
+    text-align: center;
+}
+
+
 
 /* --- RESPONSIVE LAYOUTS --- */
 

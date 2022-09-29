@@ -1,15 +1,14 @@
 import dataArrays from '../../assets/js/cards.js';
 import MenuElement from '../../assets/js/menu.js';
-//import ContentContainer from '../../assets/js/content.js';
+import ContentContainer from '../../assets/js/content.js';
 
-const [topics, cards] = dataArrays;
+const [topics, cards] = [dataArrays[0], dataArrays.slice(1)];
 
 const menu = new MenuElement(topics)
     .addToDoc();
-/*
-const content = new ContentContainer(topics, cards)
+
+const content = new ContentContainer(topics, cards, menu)
     .addToDoc();
-*/
 
 document.querySelector('body').addEventListener('click', event => {
     const targetClassList = event.target.classList;
@@ -22,9 +21,9 @@ document.querySelector('body').addEventListener('click', event => {
         case (document.querySelector('body').classList.contains('opened-menu') && !targetClassList.contains('menu')):
             menu.close();
             if (targetClassList.contains('topic')) {
-                const activeTopic = event.target;
-                menu.activateTopic(activeTopic);
-                //content.activatePage(activeTopic);
+                const activeTopicElement = event.target;
+                menu.changeTopic(activeTopicElement);
+                content.changePage(activeTopicElement.innerHTML);
             }
             break;
     }
