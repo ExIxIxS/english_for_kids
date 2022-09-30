@@ -1,0 +1,137 @@
+/* border-box model for all elements */
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+/* --- Page color styling --- */
+
+:root {
+    --color-bg-main-1: #66b3fc;
+    --color-bg-main-2: #dbf5f8;
+    --color-bg-main-3: #d2f848;
+    --color-bg-main-4: #f0c2cd63;
+    --color-font-1: #d9aa63;
+}
+
+/* ---------------------------------- */
+
+body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-bg-main-1);
+}
+
+body.opened-menu {
+    overflow-y: hidden;
+}
+
+.graphic, img {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.container-centered {
+    max-width: 1440px;
+    min-width: 1440px;
+    margin: 0 auto;
+    background-color: var(--color-bg-main-2);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    position: sticky;
+}
+
+h1 {
+    text-align: center;
+}
+
+.menu-button {
+    height: 20px;
+    z-index: 10;
+}
+
+.menu-button:hover {
+    cursor:pointer;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 320px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--color-bg-main-3);
+    z-index: 9;
+    visibility: hidden;
+}
+
+nav.opened-menu {
+    visibility: visible;
+    left: 0;
+}
+
+.menu-list li {
+    text-align: center;
+    margin: 15px 0;
+    font-size: 2em;
+    background-color: var(--color-bg-main-1);
+}
+
+.menu-list li.active-page {
+    background-color: var(--color-bg-main-4);
+}
+
+main.container-centered {
+    background-color: var(--color-bg-main-4);
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 280px;
+    height: 320px;
+    background-color: royalblue;
+    margin: 15px;
+}
+
+.card, .card img {
+    border-radius: 25px;
+}
+
+.card p {
+    font-size: 2em;
+    text-align: center;
+}
+
+
+
+/* --- RESPONSIVE LAYOUTS --- */
+
+@media (max-width: 1439px) {
+    .container-centered {
+        min-width: calc(1440vw*100/1440);
+    }
+
+
+}
