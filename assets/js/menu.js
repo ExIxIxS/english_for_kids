@@ -9,21 +9,24 @@ export default class MenuElement {
         this.startMenu = startMenu;
         this.endMenu = endMenu;
         this.activePage = this.startMenu;
+        this.menuItemsElements = null;
+        this.element = null;
         this.build();
     }
 
     build() {
         function createLi(topicName='') {
             const element = document.createElement('li');
-            element.className = 'topic';
+            element.className = 'button menu-item';
             element.innerHTML = topicName;
             return element;
         }
 
         const ulElement = document.createElement('ul');
         ulElement.className = 'menu-list';
+
         ulElement.append(createLi(this.startMenu));
-        this.topicsArr.forEach(topic => ulElement.append(createLi(topic)));
+        this.topicsArr.forEach(topicName => ulElement.append(createLi(topicName)));
         ulElement.append(createLi(this.endMenu));
 
         const menuElement = document.createElement('nav');
@@ -35,7 +38,8 @@ export default class MenuElement {
 
     addToDoc() {
         document.querySelector('header').prepend(this.element);
-        this.menuTopicElements = document.getElementsByClassName('topic');
+        this.menuItemsElements = document.getElementsByClassName('menu-item');
+        this.setActiveTopic(this.menuItemsElements[0]);
         return this;
     }
 
@@ -48,17 +52,23 @@ export default class MenuElement {
         this.openedMenuCollections.map(htmlCollection => htmlCollection[0].classList.remove('opened-menu'));
     }
 
-    changeTopic(topicElement) {
+    setActiveTopic(topicElement) {
         const topicName = topicElement.innerHTML;
-        if (topicName !== this.activePage) {
-            const className = 'active-page';
-            this.activePage = topicName;
-            for (let topicElement of this.menuTopicElements) {
-                topicElement.classList.remove(className);
-            }
-            topicElement.classList.add(className);
+        const className = 'active-page';
+        this.activePage = topicName;
+        for (let topicElement of this.menuItemsElements) {
+            topicElement.classList.remove(className);
         }
+        topicElement.classList.add(className);
 
         return this;
+    }
+
+    getMenuItemByName(itemName) {
+        for (let element of this.menuItemsElements) {
+            if (element.innerHTML === itemName) {
+                return element;
+            }
+        }
     }
 }
