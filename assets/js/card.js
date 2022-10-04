@@ -1,10 +1,8 @@
-import {CommonClass,
-    createCompleteElement,
+import {createCustomElement,
 } from './common.js';
 
-export default class Card extends CommonClass {
+export default class Card {
     constructor(cardObj, type='main page') {
-        super();
         this.type = type;
         this.validTypes = ['main page', 'topic'];
         this.element = null;
@@ -42,7 +40,7 @@ export default class Card extends CommonClass {
                 break;
         }
 
-        this.element = createCompleteElement('div', classNames, template);
+        this.element = createCustomElement('div', classNames, template);
         return this;
     }
 }

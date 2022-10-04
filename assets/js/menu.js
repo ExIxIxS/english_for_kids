@@ -11,6 +11,7 @@ export default class MenuElement {
         this.activePage = this.startMenu;
         this.menuItemsElements = null;
         this.element = null;
+
         this.build();
     }
 

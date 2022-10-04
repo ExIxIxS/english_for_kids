@@ -1,26 +1,25 @@
 import Card from '../../assets/js/card.js';
 
-import {CommonClass,
-        createCompleteElement,
+import {createCustomElement,
 } from './common.js';
 
-export default class ContentContainer extends CommonClass {
+export default class ContentContainer{
     constructor(topicsArr, cardsArr, menuObj, type='main page') {
-        super();
         this.topicsArr = topicsArr;
         this.cardsArr = cardsArr;
         this.menu = menuObj;
         this.validTypes = ['main page', 'topic', 'statistic'];
         this.validCardClasses = ['card', 'card-content', 'card-text', 'card-graphic', 'card-image'];
-        this.applyValidType(type);
-        this.topicName = this.menu.activePage;
+        this.type = this.getValidType(type);
+        this.topicName = null;
         this.cardsCollection = null;
         this.element = null;
+
         this.build();
     }
 
     build() {
-        const contentWrapper = createCompleteElement('div', 'content-wrapper');
+        const contentWrapper = createCustomElement('div', 'content-wrapper');
         this.topicName = this.menu.activePage;
         let contentElement;
 
@@ -28,7 +27,7 @@ export default class ContentContainer extends CommonClass {
             case 'statistic':
                 break;
             case 'main page':
-                contentElement = createCompleteElement('div', 'card-container');
+                contentElement = createCustomElement('div', 'card-container');
                 this.topicsArr.forEach((topic, index) => {
                     const cardObj = {
                         cardName: topic,
@@ -38,7 +37,7 @@ export default class ContentContainer extends CommonClass {
                 })
                 break;
             case 'topic':
-                contentElement = createCompleteElement('div', 'card-container');
+                contentElement = createCustomElement('div', 'card-container');
                 const cardIndex = this.topicsArr.findIndex(item => item === this.topicName);
                 this.cardsArr[cardIndex].forEach(cardObj => {
                     contentElement.append(new Card(cardObj, this.type).element)
@@ -66,7 +65,7 @@ export default class ContentContainer extends CommonClass {
     }
 
     changePage(menuTopicName) {
-        this.type = this.getValidType(menuTopicName)
+        this.type = this.getValidTopicName(menuTopicName)
         this
             .build()
             .clear()
@@ -76,6 +75,25 @@ export default class ContentContainer extends CommonClass {
 
     isElementInCard(element) {
         return (this.validCardClasses.some(className => element.classList.contains(className)))
+    }
+
+    getValidType(type) {
+        if (this.validTypes.includes(type)) {
+            return type;
+        } else {
+            throw new Error('wrong type of Object')
+        }
+    }
+
+    getValidTopicName(menuTopicName) {
+        const curentMenuTopicName = menuTopicName.toLowerCase();
+        if (this.validTypes.includes(curentMenuTopicName)) {
+            return menuTopicName;
+        } else if (this.topicsArr.map(item => item.toLowerCase()).includes(curentMenuTopicName)) {
+            return 'topic';
+        } else {
+            throw new Error('wrong menu topic Name');
+        }
     }
 
     getCardObjByWord(word){

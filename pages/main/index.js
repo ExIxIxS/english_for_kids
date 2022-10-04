@@ -12,5 +12,3 @@ const content = new ContentContainer(topics, cards, menu)
     .addToDoc();
 
 document.querySelector('body').addEventListener('click', event => clickUserInteractive(event, menu, content));
-
-
