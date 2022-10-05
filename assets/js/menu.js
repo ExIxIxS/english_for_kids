@@ -1,75 +1,80 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable consistent-return */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-undef */
+
 export default class MenuElement {
-    constructor(topicsArr, startMenu='Main page', endMenu='Statistic') {
-        this.openedMenuCollections = [
-            document.getElementsByTagName('body'),
-            document.getElementsByClassName('menu'),
-            document.getElementsByClassName('menu-button')
-        ];
-        this.topicsArr = topicsArr;
-        this.startMenu = startMenu;
-        this.endMenu = endMenu;
-        this.activePage = this.startMenu;
-        this.menuItemsElements = null;
-        this.element = null;
+  constructor(topicsArr, startMenu = 'Main page', endMenu = 'Statistic') {
+    this.openedMenuCollections = [
+      document.getElementsByTagName('body'),
+      document.getElementsByClassName('menu'),
+      document.getElementsByClassName('menu-button'),
+    ];
+    this.topicsArr = topicsArr;
+    this.startMenu = startMenu;
+    this.endMenu = endMenu;
+    this.activePage = this.startMenu;
+    this.menuItemsElements = null;
+    this.element = null;
 
-        this.build();
+    this.build();
+  }
+
+  build() {
+    function createLi(topicName = '') {
+      const element = document.createElement('li');
+      element.className = 'button menu-item';
+      element.innerHTML = topicName;
+      return element;
     }
 
-    build() {
-        function createLi(topicName='') {
-            const element = document.createElement('li');
-            element.className = 'button menu-item';
-            element.innerHTML = topicName;
-            return element;
-        }
+    const ulElement = document.createElement('ul');
+    ulElement.className = 'menu-list';
 
-        const ulElement = document.createElement('ul');
-        ulElement.className = 'menu-list';
+    ulElement.append(createLi(this.startMenu));
+    this.topicsArr.forEach((topicName) => ulElement.append(createLi(topicName)));
+    ulElement.append(createLi(this.endMenu));
 
-        ulElement.append(createLi(this.startMenu));
-        this.topicsArr.forEach(topicName => ulElement.append(createLi(topicName)));
-        ulElement.append(createLi(this.endMenu));
+    const menuElement = document.createElement('nav');
+    menuElement.className = 'menu';
+    menuElement.append(ulElement);
+    this.element = menuElement;
+    return this;
+  }
 
-        const menuElement = document.createElement('nav');
-        menuElement.className = 'menu';
-        menuElement.append(ulElement);
-        this.element = menuElement;
-        return this;
+  addToDoc() {
+    document.querySelector('header').prepend(this.element);
+    this.menuItemsElements = document.getElementsByClassName('menu-item');
+    this.setActiveTopic(this.menuItemsElements[0]);
+    return this;
+  }
+
+  toggle() {
+    this.openedMenuCollections.map((htmlCollection) => htmlCollection[0].classList.toggle('opened-menu'));
+    return this;
+  }
+
+  close() {
+    this.openedMenuCollections.map((htmlCollection) => htmlCollection[0].classList.remove('opened-menu'));
+  }
+
+  setActiveTopic(topicElement) {
+    const topicName = topicElement.innerHTML;
+    const className = 'active-page';
+    this.activePage = topicName;
+    for (const menuItemElement of this.menuItemsElements) {
+      menuItemElement.classList.remove(className);
     }
+    topicElement.classList.add(className);
 
-    addToDoc() {
-        document.querySelector('header').prepend(this.element);
-        this.menuItemsElements = document.getElementsByClassName('menu-item');
-        this.setActiveTopic(this.menuItemsElements[0]);
-        return this;
+    return this;
+  }
+
+  getMenuItemByName(itemName) {
+    for (const element of this.menuItemsElements) {
+      if (element.innerHTML === itemName) {
+        return element;
+      }
     }
-
-    toggle() {
-        this.openedMenuCollections.map(htmlCollection => htmlCollection[0].classList.toggle('opened-menu'));
-        return this;
-    }
-
-    close() {
-        this.openedMenuCollections.map(htmlCollection => htmlCollection[0].classList.remove('opened-menu'));
-    }
-
-    setActiveTopic(topicElement) {
-        const topicName = topicElement.innerHTML;
-        const className = 'active-page';
-        this.activePage = topicName;
-        for (let topicElement of this.menuItemsElements) {
-            topicElement.classList.remove(className);
-        }
-        topicElement.classList.add(className);
-
-        return this;
-    }
-
-    getMenuItemByName(itemName) {
-        for (let element of this.menuItemsElements) {
-            if (element.innerHTML === itemName) {
-                return element;
-            }
-        }
-    }
+  }
 }
