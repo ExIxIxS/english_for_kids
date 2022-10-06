@@ -8,6 +8,7 @@ import { createCustomElement } from './commonFunct';
 class gameControls {
   constructor() {
     this.element = null;
+    this.liveElement = null;
     this.build();
   }
 
@@ -27,6 +28,17 @@ class gameControls {
 
   addToDoc() {
     document.querySelector('header').append(this.element);
+    [this.liveElement] = document.getElementsByClassName('game-controls');
+    return this;
+  }
+
+  show() {
+    this.liveElement.classList.remove('inactive');
+    return this;
+  }
+
+  hide() {
+    this.liveElement.classList.add('inactive');
     return this;
   }
 }

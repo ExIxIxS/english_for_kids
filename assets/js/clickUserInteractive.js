@@ -31,9 +31,10 @@ export default function clickUserInteractive(event, appObj) {
       break;
 
     //  clicking on switch button
-    case (targetClassList.includes('switch-trigger')):
+    case (targetClassList.includes('switch-trigger')): {
       switchObj.toggle();
       break;
+    }
 
     //  clicking on card flip button
     case (event.target.parentElement.classList.contains('card-flip-button')):
@@ -57,5 +58,11 @@ export default function clickUserInteractive(event, appObj) {
     }
     default:
       break;
+  }
+
+  if (appObj.activeMode === 'play' && (content.getValidTopicType(appObj.activePage) === 'topic')) {
+    appObj.gameControl.show();
+  } else {
+    appObj.gameControl.hide();
   }
 }

@@ -6,9 +6,9 @@
 import MenuElement from './menu';
 import ContentContainer from './content';
 import SwitchElement from './switch';
-import GameControls from './gameControls';
+import GameControls from './gameControl';
 
-class AppControls {
+class AppControl {
   constructor(topicsArr, cardsArr) {
     this.topicsArr = topicsArr;
     this.cardsArr = cardsArr;
@@ -29,6 +29,22 @@ class AppControls {
     this.content = new ContentContainer(this)
       .addToDoc();
   }
+
+  get activePage() {
+    return this.menu.activePage;
+  }
+
+  set activePage(value) {
+    this.menu.activePage = value;
+  }
+
+  get activeMode() {
+    return this.switchObj.activeMode;
+  }
+
+  set activeMode(value) {
+    this.switchObj.activeMode = value;
+  }
 }
 
-export default AppControls;
+export default AppControl;

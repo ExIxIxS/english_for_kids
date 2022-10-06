@@ -6,11 +6,11 @@ import '../assets/styles/normalize.css';
 import '../assets/styles/style.css';
 
 import dataArrays from '../assets/js/cards';
-import AppControls from '../assets/js/appControls';
+import AppControl from '../assets/js/appControl';
 import clickUserInteractive from '../assets/js/clickUserInteractive';
 
 const [topics, cards] = [dataArrays[0], dataArrays.slice(1)];
 
-const appControl = new AppControls(topics, cards);
+const appControl = new AppControl(topics, cards);
 
 document.querySelector('body').addEventListener('click', (event) => clickUserInteractive(event, appControl));

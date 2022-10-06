@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-console */
+/* eslint-disable linebreak-style */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-undef */
 
@@ -11,11 +13,10 @@ export default class ContentContainer {
     this.topicsArr = appCtrlObj.topicsArr;
     this.cardsArr = appCtrlObj.cardsArr;
     this.menu = appCtrlObj.menu;
-    this.activeMode = appCtrlObj.activeMode;
+    this.appControl = appCtrlObj;
     this.validTypes = ['main page', 'topic', 'statistic'];
     this.validCardClasses = ['card', 'card-content', 'card-text', 'card-graphic', 'card-image'];
     this.type = this.getValidType(type);
-    this.topicName = null;
     this.cardsCollection = null;
     this.element = null;
 
@@ -24,7 +25,6 @@ export default class ContentContainer {
 
   build() {
     const contentWrapper = createCustomElement('div', 'content-wrapper');
-    this.topicName = this.menu.activePage;
     let contentElement;
 
     switch (this.type) {
@@ -42,7 +42,10 @@ export default class ContentContainer {
         break;
       case 'topic': {
         contentElement = createCustomElement('div', 'card-container');
-        const cardIndex = this.topicsArr.findIndex((item) => item === this.topicName);
+        const cardIndex = this.topicsArr.findIndex((item) => {
+          const result = item.toLowerCase() === this.appControl.activePage;
+          return result;
+        });
         this.cardsArr[cardIndex].forEach((cardObj) => {
           contentElement.append(new Card(cardObj, this.type).element);
         });

@@ -13,7 +13,7 @@ export default class MenuElement {
     this.topicsArr = topicsArr;
     this.startMenu = startMenu;
     this.endMenu = endMenu;
-    this.activePage = this.startMenu;
+    this.activePage = this.startMenu.toLowerCase();
     this.menuItemsElements = null;
     this.element = null;
 
@@ -61,7 +61,7 @@ export default class MenuElement {
   setActiveTopic(topicElement) {
     const topicName = topicElement.innerHTML;
     const className = 'active-page';
-    this.activePage = topicName;
+    this.activePage = topicName.toLowerCase();
     for (const menuItemElement of this.menuItemsElements) {
       menuItemElement.classList.remove(className);
     }
