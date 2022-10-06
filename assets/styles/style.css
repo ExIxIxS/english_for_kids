@@ -32,6 +32,12 @@ body.opened-menu {
     overflow-y: hidden;
 }
 
+.inactive {
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+}
+
 .graphic, img {
     width: 100%;
     height: auto;
@@ -48,13 +54,21 @@ body.opened-menu {
 
 header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    height: 100px;
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 8;
+}
+
+.main-controls, .game-controls {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 h1 {
@@ -70,8 +84,42 @@ h1 {
     z-index: 10;
 }
 
-.menu-button:hover {
-    cursor:pointer;
+.switch {
+    width: 110px;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 60px;
+    position: relative;
+}
+
+.switch-rail {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.switch.switch-on .switch-rail {
+    justify-content: flex-end;
+}
+
+.switch-roller {
+    width: 55px;
+    border-radius: inherit;
+    background-color: rgba(214, 225, 65, 0.459);
+    z-index: 10;
+}
+
+.switch-trigger {
+    margin: 0 10px;
+    height: 40px;
+    z-index: 9;
+    padding: 10px 0;
+    text-align: center;
 }
 
 nav {

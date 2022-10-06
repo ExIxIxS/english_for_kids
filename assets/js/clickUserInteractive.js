@@ -1,12 +1,18 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 /* eslint-disable no-undef */
 
-export default function clickUserInteractive(event, menuObj, contentObj) {
-  const menu = menuObj;
-  const content = contentObj;
+export default function clickUserInteractive(event, appObj) {
+  const menu = appObj.menu;
+  const switchObj = appObj.switchObj;
+  const content = appObj.content;
   const targetClassList = Array.from(event.target.classList);
   let cardElement;
   let activeMenuElement;
+
+  // console.log(targetClassList);
 
   switch (true) {
     //  clicking on menu burger button
@@ -22,6 +28,11 @@ export default function clickUserInteractive(event, menuObj, contentObj) {
         menu.setActiveTopic(activeMenuElement);
         content.changePage(activeMenuElement.innerHTML);
       }
+      break;
+
+    //  clicking on switch button
+    case (targetClassList.includes('switch-trigger')):
+      switchObj.toggle();
       break;
 
     //  clicking on card flip button

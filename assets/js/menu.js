@@ -43,7 +43,7 @@ export default class MenuElement {
   }
 
   addToDoc() {
-    document.querySelector('header').prepend(this.element);
+    document.querySelector('.main-controls').prepend(this.element);
     this.menuItemsElements = document.getElementsByClassName('menu-item');
     this.setActiveTopic(this.menuItemsElements[0]);
     return this;

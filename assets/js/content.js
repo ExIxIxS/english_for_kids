@@ -7,10 +7,11 @@ import Card from './card';
 import { createCustomElement } from './commonFunct';
 
 export default class ContentContainer {
-  constructor(topicsArr, cardsArr, menuObj, type = 'main page') {
-    this.topicsArr = topicsArr;
-    this.cardsArr = cardsArr;
-    this.menu = menuObj;
+  constructor(appCtrlObj, type = 'main page') {
+    this.topicsArr = appCtrlObj.topicsArr;
+    this.cardsArr = appCtrlObj.cardsArr;
+    this.menu = appCtrlObj.menu;
+    this.activeMode = appCtrlObj.activeMode;
     this.validTypes = ['main page', 'topic', 'statistic'];
     this.validCardClasses = ['card', 'card-content', 'card-text', 'card-graphic', 'card-image'];
     this.type = this.getValidType(type);
