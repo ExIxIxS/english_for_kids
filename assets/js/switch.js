@@ -6,9 +6,10 @@
 import { createCustomElement } from './commonFunct';
 
 class Switch {
-  constructor() {
+  constructor(appCtrlObj) {
     this.validModes = ['train', 'play'];
     this.activeMode = 'train';
+    this.appControl = appCtrlObj;
     this.element = null;
     this.build();
   }

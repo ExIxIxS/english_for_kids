@@ -2,7 +2,8 @@
 import { createCustomElement } from './commonFunct';
 
 class Card {
-  constructor(cardObj, type = 'main page') {
+  constructor(appCtrlObj, cardObj, type = 'main page') {
+    this.appCtrlObj = appCtrlObj;
     this.type = type;
     this.validTypes = ['main page', 'topic'];
     this.element = null;
@@ -25,7 +26,8 @@ class Card {
         classNames += ' card-main-page';
         break;
       case 'topic':
-        template = `
+        if (this.appCtrlObj.activeMode === 'train') {
+          template = `
                     <div class="card-content">
                         <div class="graphic card-graphic">
                             <img class="card-image" src="../assets/${cardObj.image}" alt="${cardObj.word}" width="390" height="260">
@@ -36,6 +38,16 @@ class Card {
                         </div>
                     </div>
                     `;
+        } else {
+          template = `
+                    <div class="card-content">
+                        <div class="graphic card-graphic">
+                            <img class="card-image" src="../assets/${cardObj.image}" alt="${cardObj.word}" width="390" height="260">
+                        </div>
+                    </div>
+                    `;
+          classNames += ' game-card';
+        }
         classNames += ' card-topic';
         break;
       default:

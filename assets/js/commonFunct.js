@@ -9,4 +9,9 @@ function createCustomElement(type, className = '', innerHTML = '') {
   return element;
 }
 
-export { createCustomElement };
+function getRandomInt(maxInt, minInt = 0) {
+  //  max and min inclusive
+  return Math.floor(Math.random() * (maxInt - minInt + 1)) + minInt;
+}
+
+export { createCustomElement, getRandomInt };

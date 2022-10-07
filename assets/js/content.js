@@ -5,15 +5,14 @@
 /* eslint-disable no-undef */
 
 import Card from './card';
-
 import { createCustomElement } from './commonFunct';
 
 export default class ContentContainer {
   constructor(appCtrlObj, type = 'main page') {
+    this.appControl = appCtrlObj;
     this.topicsArr = appCtrlObj.topicsArr;
     this.cardsArr = appCtrlObj.cardsArr;
     this.menu = appCtrlObj.menu;
-    this.appControl = appCtrlObj;
     this.validTypes = ['main page', 'topic', 'statistic'];
     this.validCardClasses = ['card', 'card-content', 'card-text', 'card-graphic', 'card-image'];
     this.type = this.getValidType(type);
@@ -37,7 +36,7 @@ export default class ContentContainer {
             cardName: topic,
             image: this.cardsArr[index][0].image,
           };
-          contentElement.append(new Card(cardObj).element);
+          contentElement.append(new Card(this.appControl, cardObj).element);
         });
         break;
       case 'topic': {
@@ -47,7 +46,7 @@ export default class ContentContainer {
           return result;
         });
         this.cardsArr[cardIndex].forEach((cardObj) => {
-          contentElement.append(new Card(cardObj, this.type).element);
+          contentElement.append(new Card(this.appControl, cardObj, this.type).element);
         });
 
         break;
@@ -76,6 +75,9 @@ export default class ContentContainer {
 
   changePage(menuTopicName) {
     this.type = this.getValidTopicType(menuTopicName);
+    this.appControl.gameControl
+      .endGame();
+
     this
       .build()
       .clear()
@@ -108,6 +110,10 @@ export default class ContentContainer {
     return this.cardsArr.flat().find((cardObj) => cardObj.word === word);
   }
 
+  getCardObjByImageName(imageName) {
+    return this.cardsArr.flat().find((cardObj) => cardObj.image === `img/${imageName}.jpg`);
+  }
+
   getCardObjByTranslation(translation) {
     return this.cardsArr.flat().find((cardObj) => cardObj.translation === translation);
   }
@@ -124,11 +130,17 @@ export default class ContentContainer {
     return cardElement.querySelector('p').innerHTML;
   }
 
+  getCardImageName(cardElement) {
+    const imageSrc = cardElement.querySelector('.card-image').src;
+    const imageName = imageSrc.match(/(?<=\/)\w+(?=\.jpg)/)[0];
+    return imageName;
+  }
+
   flipCard(cardElement) {
     const cardParagraph = cardElement.querySelector('p');
     const cardFlipButton = cardElement.querySelector('.card-flip-button');
-    const cardWord = cardParagraph.innerHTML;
-    const cardObj = this.getCardObjByWord(cardWord);
+    const cardImageName = this.getCardImageName(cardElement);
+    const cardObj = this.getCardObjByImageName(cardImageName);
 
     cardElement.classList.remove('unflipped');
     cardElement.classList.add('flipped');
@@ -166,14 +178,6 @@ export default class ContentContainer {
         cardFlipButton.hidden = false;
       }, 500);
     }
-
-    return this;
-  }
-
-  playCardSound(word) {
-    const cardObj = this.getCardObjByWord(word);
-    const audioElement = new Audio(`../assets/${cardObj.audioSrc}`);
-    audioElement.play();
 
     return this;
   }
