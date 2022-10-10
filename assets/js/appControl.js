@@ -55,6 +55,16 @@ class AppControl {
     this.activeArrCardsObj = arrCardsObj;
   }
 
+  changePage(pageName) {
+    this.menu.setActiveTopic(pageName);
+    this.content.changeContent(pageName);
+    if (this.activeMode === 'play' && (this.content.getValidTopicType(this.activePage) === 'topic')) {
+      this.gameControl.show();
+    } else {
+      this.gameControl.hide();
+    }
+  }
+
   playCardSound(cardObj) {
     console.log(`Play "${cardObj.audioSrc}"`);
     const audioElement = new Audio(`../assets/${cardObj.audioSrc}`);
@@ -63,12 +73,14 @@ class AppControl {
   }
 
   playAppSound(soundName) {
-    /*
-    const filename = this.getCardObjByWord(soundName);
-    const audioElement = new Audio(`../assets/audio/app/${filename}`);
+    const soundsLibrary = {
+      correct: 'app/correct.mp3',
+      wrong: 'app/error.mp3',
+      success: 'app/success.mp3',
+      failure: 'app/failure.mp3',
+    };
+    const audioElement = new Audio(`../assets/audio/${soundsLibrary[soundName]}`);
     audioElement.play();
-    */
-    console.log(soundName);
     return this;
   }
 }

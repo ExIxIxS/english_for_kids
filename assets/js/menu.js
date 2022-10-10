@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-console */
+/* eslint-disable linebreak-style */
 /* eslint-disable consistent-return */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-undef */
@@ -45,7 +47,7 @@ export default class MenuElement {
   addToDoc() {
     document.querySelector('.main-controls').prepend(this.element);
     this.menuItemsElements = document.getElementsByClassName('menu-item');
-    this.setActiveTopic(this.menuItemsElements[0]);
+    this.setActiveTopic(this.menuItemsElements[0].innerHTML);
     return this;
   }
 
@@ -58,9 +60,9 @@ export default class MenuElement {
     this.openedMenuCollections.map((htmlCollection) => htmlCollection[0].classList.remove('opened-menu'));
   }
 
-  setActiveTopic(topicElement) {
-    const topicName = topicElement.innerHTML;
+  setActiveTopic(topicName) {
     const className = 'active-page';
+    const topicElement = this.getMenuItemByName(topicName);
     this.activePage = topicName.toLowerCase();
     for (const menuItemElement of this.menuItemsElements) {
       menuItemElement.classList.remove(className);
@@ -72,7 +74,7 @@ export default class MenuElement {
 
   getMenuItemByName(itemName) {
     for (const element of this.menuItemsElements) {
-      if (element.innerHTML === itemName) {
+      if (element.innerHTML.toLowerCase() === itemName.toLowerCase()) {
         return element;
       }
     }

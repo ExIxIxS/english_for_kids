@@ -22,7 +22,7 @@ class Card {
                         </div>
                         <p class="card-text">${cardObj.cardName}</p>
                     </div>
-                            `;
+                  `;
         classNames += ' card-main-page';
         break;
       case 'topic':

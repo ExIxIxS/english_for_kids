@@ -26,15 +26,14 @@ function clickUserInteractive(event, appCtrlObj) {
       menu.close();
       if (targetClassList.includes('menu-item')) {
         activeMenuElement = event.target;
-        menu.setActiveTopic(activeMenuElement);
-        content.changePage(activeMenuElement.innerHTML);
+        appControl.changePage(activeMenuElement.innerHTML);
       }
       break;
 
     //  clicking on switch button
     case (targetClassList.includes('switch-trigger')): {
       switchObj.toggle();
-      content.changePage(appControl.activePage);
+      appControl.changePage(appControl.activePage);
       break;
     }
 
@@ -62,14 +61,13 @@ function clickUserInteractive(event, appCtrlObj) {
       const cardImageName = content.getCardImageName(cardElement);
       const cardObj = content.getCardObjByImageName(cardImageName);
 
-      if (isGameMode && gameControl.isGameStarted) {
+      if (isGameMode && gameControl.isGameStarted && !cardElement.classList.contains('disabled')) {
         gameControl.processAnswer(cardObj, cardElement);
         break;
       } else if (cardElement.classList.contains('card-main-page')) {
-        const topicName = content.getCardInnerText(cardElement);
-        activeMenuElement = menu.getMenuItemByName(topicName);
-        menu.setActiveTopic(activeMenuElement);
-        content.changePage(topicName);
+        const pageName = content.getCardInnerText(cardElement);
+        activeMenuElement = menu.getMenuItemByName(pageName);
+        appControl.changePage(pageName);
       } else if (!cardElement.classList.contains('flipped') && !cardElement.classList.contains('game-card')) {
         appControl.playCardSound(cardObj);
       }
@@ -77,12 +75,6 @@ function clickUserInteractive(event, appCtrlObj) {
     }
     default:
       break;
-  }
-
-  if (appControl.activeMode === 'play' && (content.getValidTopicType(appControl.activePage) === 'topic')) {
-    appControl.gameControl.show();
-  } else {
-    appControl.gameControl.hide();
   }
 }
 

@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable linebreak-style */
 /* eslint-disable no-console */
 /* eslint-disable linebreak-style */
 /* eslint-disable class-methods-use-this */
@@ -63,7 +65,7 @@ export default class ContentContainer {
 
   addToDoc() {
     document.querySelector('main').append(this.element);
-    this.element = document.getElementsByClassName('content-wrapper');
+    [this.element] = document.getElementsByClassName('content-wrapper');
     this.cardsCollection = document.getElementsByClassName('card');
     return this;
   }
@@ -73,7 +75,7 @@ export default class ContentContainer {
     return this;
   }
 
-  changePage(menuTopicName) {
+  changeContent(menuTopicName) {
     this.type = this.getValidTopicType(menuTopicName);
     this.appControl.gameControl
       .endGame();
@@ -178,6 +180,34 @@ export default class ContentContainer {
         cardFlipButton.hidden = false;
       }, 500);
     }
+
+    return this;
+  }
+
+  removeCards() {
+    document.querySelector('.card-container').remove();
+    return this;
+  }
+
+  playFinalClip(wrongAnswers) {
+    const clipType = (wrongAnswers === 0) ? 'success' : 'failure';
+    const classNames = 'final-clip';
+    const imageSrc = `app/${clipType}.jpg`;
+
+    const template = `
+                            <div class="graphic">
+                              <img src="../assets/img/${imageSrc}" alt="image ${clipType}" width="400" height="400">
+                            </div>
+                            `;
+
+    const finalClipElement = createCustomElement('div', classNames, template);
+    if (clipType === 'failure') {
+      finalClipElement.innerHTML += `<p class="mistakes-number">Mistakes: ${wrongAnswers}</p>`;
+    }
+
+    this.appControl.playAppSound(clipType);
+    this.removeCards();
+    this.element.append(finalClipElement);
 
     return this;
   }

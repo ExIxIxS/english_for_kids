@@ -1,8 +1,10 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable linebreak-style */
 /* eslint-disable no-console */
 /* eslint-disable linebreak-style */
 /* eslint-disable no-undef */
-
+import Star from './star';
 import {
   createCustomElement,
   getRandomInt,
@@ -12,12 +14,21 @@ class gameControl {
   constructor(appControl) {
     this.appControl = appControl;
     this.questionsBundle = [];
+    this.isGameStarted = false;
+    this.correctStarElement = new Star().element;
+    this.wrongStarElement = new Star('wrong').element;
+
     this.activeQuestion = null;
     this.element = null;
     this.liveElement = null;
-    this.correctAnswer = null;
-    this.wrongAnswer = null;
-    this.isGameStarted = false;
+    this.liveButtonElement = null;
+    this.liveIndicatorElement = null;
+    this.liveCorrectPrElement = null;
+    this.liveWrongPrElement = null;
+    this.liveStarsCollection = null;
+    this.correctAnswers = null;
+    this.wrongAnswers = null;
+
     this.build();
   }
 
@@ -27,8 +38,12 @@ class gameControl {
                     <div class="button game-button start-button">
                       Button
                     </div>
-                    <div class="game-stat">
-                      <p>Game Statistic</p>
+                    <div class="game-progress">
+                      <div class="game-indicator">
+                      </div>
+                      <p class="game-score">
+                        <span class="progress correct">0</span> | <span class="progress wrong">0</span>
+                      </p>
                     </div>
                     `;
     this.element = createCustomElement('div', classNames, template);
@@ -39,6 +54,10 @@ class gameControl {
     document.querySelector('header').append(this.element);
     [this.liveElement] = document.getElementsByClassName('game-controls');
     [this.liveButtonElement] = this.liveElement.getElementsByClassName('game-button');
+    [this.liveIndicatorElement] = this.liveElement.getElementsByClassName('game-indicator');
+    [this.liveCorrectPrElement, this.liveWrongPrElement] = this.liveElement.getElementsByClassName('progress');
+    this.liveStarsCollection = this.liveElement.getElementsByClassName('star');
+
     return this;
   }
 
@@ -58,25 +77,47 @@ class gameControl {
 
   createRandomQuestionsBundle(arrOptions) {
     this.questionsBundle = [];
-    console.log(arrOptions);
     const workArr = arrOptions.map((item) => item);
     while (this.questionsBundle.length < arrOptions.length) {
       const randomIndex = getRandomInt(workArr.length - 1);
       this.questionsBundle.push(...workArr.splice(randomIndex, 1));
     }
-    console.log(this.questionsBundle);
     return this;
   }
 
   startGame(arrOptions) {
     console.log('<<< game started !!! >>>');
     this.isGameStarted = true;
-    this.correctAnswer = 0;
-    this.wrongAnswer = 0;
+    this.correctAnswers = 0;
+    this.wrongAnswers = 0;
     this.showGameStat(); //  isn`t written
     this.createRandomQuestionsBundle(arrOptions);
     this.askQuestion();
     this.changeButtonClass('repeat-button');
+    return this;
+  }
+
+  endGame() {
+    this.isGameStarted = false;
+    this.activeQuestion = null;
+    this.changeButtonClass('start-button');
+
+    if (this.correctAnswers === this.appControl.content.cardsCollection.length
+        && this.correctAnswers !== 0) {
+      console.log(`<<< Game Over = ${this.correctAnswers}/${this.wrongAnswers} >>>`);
+      this.correctAnswers = 0;
+      this.appControl.content.playFinalClip(this.wrongAnswers);
+      this.wrongAnswers = 0;
+
+      setTimeout(() => {
+        this.appControl.changePage('Main page');
+      }, 3000);
+    }
+
+    this.liveCorrectPrElement.innerHTML = '0';
+    this.liveWrongPrElement.innerHTML = '0';
+    this.liveIndicatorElement.innerHTML = '';
+    console.log('<<< End game >>>');
     return this;
   }
 
@@ -90,6 +131,41 @@ class gameControl {
     return this;
   }
 
+  processAnswer(cardObj, cardElement) {
+    if (this.liveStarsCollection.length >= 5) {
+      this.liveIndicatorElement.firstElementChild.remove();
+    }
+
+    if (Object.entries(this.activeQuestion).every(([key, value]) => value === cardObj[key])) {
+      this.correctAnswer();
+      cardElement.classList.add('disabled');
+    } else {
+      this.wrongAnswer();
+    }
+
+    return this;
+  }
+
+  correctAnswer() {
+    this.appControl.playAppSound('correct');
+    this.correctAnswers += 1;
+    this.liveCorrectPrElement.innerHTML = this.correctAnswers;
+    this.liveIndicatorElement.append(new Star().element);
+    setTimeout(() => {
+      this.askQuestion();
+    }, 1000);
+
+    return this;
+  }
+
+  wrongAnswer() {
+    this.appControl.playAppSound('wrong');
+    this.wrongAnswers += 1;
+    this.liveWrongPrElement.innerHTML = this.wrongAnswers;
+    this.liveIndicatorElement.append(new Star('wrong').element);
+    return this;
+  }
+
   repeatQuestion() {
     this.appControl.playCardSound(this.activeQuestion);
     return this;
@@ -99,18 +175,6 @@ class gameControl {
     const removedClassName = (buttonClassName === 'start-button') ? 'repeat-button' : 'start-button';
     this.liveButtonElement.classList.add(buttonClassName);
     this.liveButtonElement.classList.remove(removedClassName);
-    return this;
-  }
-
-  endGame() {
-    this.isGameStarted = false;
-    this.changeButtonClass('start-button');
-    console.log('<<< game over !!! >>>');
-    return this;
-  }
-
-  processAnswer(cardObj, cardElement) {
-    console.log(`Its Answer Process for "${cardObj.word}" and ${cardElement}`);
     return this;
   }
 }
