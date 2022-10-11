@@ -27,11 +27,13 @@ function clickUserInteractive(event, appCtrlObj) {
       if (targetClassList.includes('menu-item')) {
         activeMenuElement = event.target;
         appControl.changePage(activeMenuElement.innerHTML);
+        appControl.switchObj.enable();
       }
       break;
 
     //  clicking on switch button
-    case (targetClassList.includes('switch-trigger')): {
+    case (targetClassList.includes('switch-trigger')
+          && !switchObj.element.classList.contains('disabled')): {
       switchObj.toggle();
       appControl.changePage(appControl.activePage);
       break;
@@ -70,9 +72,36 @@ function clickUserInteractive(event, appCtrlObj) {
         appControl.changePage(pageName);
       } else if (!cardElement.classList.contains('flipped') && !cardElement.classList.contains('game-card')) {
         appControl.playCardSound(cardObj);
+        appControl.stat.storage.add('click', cardObj);
       }
       break;
     }
+
+    //  clicking on table header
+    case (targetClassList.includes('sortable')):
+      appControl.stat.sortTable(event.target);
+      content.changeContent('statistic');
+      break;
+
+    //  clicking on reset button
+    case (targetClassList.includes('reset-stat')):
+      appControl.stat.storage.cleanStorage();
+      if (appControl.content.type === 'statistic') {
+        content.changeContent('statistic');
+      } else {
+        content.changeContent('train diff');
+      }
+
+      break;
+
+    //  clicking on train diff. words button
+    case (targetClassList.includes('train-diff')):
+      switchObj.train();
+      switchObj.disable();
+      appControl.stat.storage.getDiffWordsArr();
+      content.changeContent('train diff');
+      break;
+
     default:
       break;
   }

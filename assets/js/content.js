@@ -9,16 +9,17 @@
 import Card from './card';
 import { createCustomElement } from './commonFunct';
 
-export default class ContentContainer {
+class ContentContainer {
   constructor(appCtrlObj, type = 'main page') {
     this.appControl = appCtrlObj;
     this.topicsArr = appCtrlObj.topicsArr;
     this.cardsArr = appCtrlObj.cardsArr;
     this.menu = appCtrlObj.menu;
-    this.validTypes = ['main page', 'topic', 'statistic'];
+    this.validTypes = ['main page', 'topic', 'statistic', 'train diff'];
     this.validCardClasses = ['card', 'card-content', 'card-text', 'card-graphic', 'card-image'];
     this.type = this.getValidType(type);
     this.cardsCollection = null;
+    this.gameCatdsCollection = null;
     this.element = null;
 
     this.build();
@@ -30,27 +31,22 @@ export default class ContentContainer {
 
     switch (this.type) {
       case 'statistic':
+        if (!this.appControl.stat.sorted) {
+          this.appControl.stat.build();
+        } else {
+          this.appControl.stat.sorted = false;
+        }
+        contentElement = this.appControl.stat.element;
+        break;
+      case 'train diff':
+        this.appControl.stat.build();
+        contentElement = this.appControl.stat.element;
         break;
       case 'main page':
-        contentElement = createCustomElement('div', 'card-container');
-        this.topicsArr.forEach((topic, index) => {
-          const cardObj = {
-            cardName: topic,
-            image: this.cardsArr[index][0].image,
-          };
-          contentElement.append(new Card(this.appControl, cardObj).element);
-        });
+        contentElement = this.createMainCardsContainer();
         break;
       case 'topic': {
-        contentElement = createCustomElement('div', 'card-container');
-        const cardIndex = this.topicsArr.findIndex((item) => {
-          const result = item.toLowerCase() === this.appControl.activePage;
-          return result;
-        });
-        this.cardsArr[cardIndex].forEach((cardObj) => {
-          contentElement.append(new Card(this.appControl, cardObj, this.type).element);
-        });
-
+        contentElement = this.createTopicCardsContainer();
         break;
       }
       default:
@@ -63,10 +59,38 @@ export default class ContentContainer {
     return this;
   }
 
+  createMainCardsContainer() {
+    const mainContainerElement = createCustomElement('div', 'card-container');
+    this.topicsArr.forEach((topic, index) => {
+      const cardObj = {
+        cardName: topic,
+        image: this.cardsArr[index][0].image,
+      };
+      mainContainerElement.append(new Card(this.appControl, cardObj).element);
+    });
+
+    return mainContainerElement;
+  }
+
+  createTopicCardsContainer() {
+    const cardsContainerElement = createCustomElement('div', 'card-container');
+    const cardIndex = this.topicsArr.findIndex((item) => {
+      const result = item.toLowerCase() === this.appControl.activePage;
+      return result;
+    });
+
+    this.cardsArr[cardIndex].forEach((cardObj) => {
+      cardsContainerElement.append(new Card(this.appControl, cardObj, this.type).element);
+    });
+
+    return cardsContainerElement;
+  }
+
   addToDoc() {
     document.querySelector('main').append(this.element);
     [this.element] = document.getElementsByClassName('content-wrapper');
     this.cardsCollection = document.getElementsByClassName('card');
+    this.gameCardsCollection = document.getElementsByClassName('game-card');
     return this;
   }
 
@@ -212,3 +236,5 @@ export default class ContentContainer {
     return this;
   }
 }
+
+export default ContentContainer;

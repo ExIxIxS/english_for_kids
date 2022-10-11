@@ -7,6 +7,7 @@ import MenuElement from './menu';
 import ContentContainer from './content';
 import SwitchElement from './switch';
 import GameControl from './gameControl';
+import Statistic from './statistic';
 
 class AppControl {
   constructor(topicsArr, cardsArr) {
@@ -28,6 +29,8 @@ class AppControl {
 
     this.content = new ContentContainer(this)
       .addToDoc();
+
+    this.stat = new Statistic(this);
   }
 
   get activePage() {
@@ -63,10 +66,10 @@ class AppControl {
     } else {
       this.gameControl.hide();
     }
+    return this;
   }
 
   playCardSound(cardObj) {
-    console.log(`Play "${cardObj.audioSrc}"`);
     const audioElement = new Audio(`../assets/${cardObj.audioSrc}`);
     audioElement.play();
     return this;
@@ -79,6 +82,7 @@ class AppControl {
       success: 'app/success.mp3',
       failure: 'app/failure.mp3',
     };
+
     const audioElement = new Audio(`../assets/audio/${soundsLibrary[soundName]}`);
     audioElement.play();
     return this;

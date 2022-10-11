@@ -38,6 +38,19 @@ class Switch {
     this.element.classList.toggle('switch-on');
     this.activeMode = (this.activeMode === 'play') ? 'train' : 'play';
   }
+
+  train() {
+    this.element.classList.remove('switch-on');
+    this.activeMode = 'train';
+  }
+
+  enable() {
+    this.element.classList.remove('disabled');
+  }
+
+  disable() {
+    this.element.classList.add('disabled');
+  }
 }
 
 export default Switch;

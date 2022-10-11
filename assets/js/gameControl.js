@@ -86,7 +86,6 @@ class gameControl {
   }
 
   startGame(arrOptions) {
-    console.log('<<< game started !!! >>>');
     this.isGameStarted = true;
     this.correctAnswers = 0;
     this.wrongAnswers = 0;
@@ -102,22 +101,23 @@ class gameControl {
     this.activeQuestion = null;
     this.changeButtonClass('start-button');
 
-    if (this.correctAnswers === this.appControl.content.cardsCollection.length
+    if (this.correctAnswers === this.appControl.content.gameCardsCollection.length
         && this.correctAnswers !== 0) {
-      console.log(`<<< Game Over = ${this.correctAnswers}/${this.wrongAnswers} >>>`);
-      this.correctAnswers = 0;
       this.appControl.content.playFinalClip(this.wrongAnswers);
+      this.correctAnswers = 0;
       this.wrongAnswers = 0;
 
       setTimeout(() => {
         this.appControl.changePage('Main page');
       }, 3000);
+
+      this.correctAnswers = 0;
+      this.wrongAnswers = 0;
     }
 
     this.liveCorrectPrElement.innerHTML = '0';
     this.liveWrongPrElement.innerHTML = '0';
     this.liveIndicatorElement.innerHTML = '';
-    console.log('<<< End game >>>');
     return this;
   }
 
@@ -137,18 +137,19 @@ class gameControl {
     }
 
     if (Object.entries(this.activeQuestion).every(([key, value]) => value === cardObj[key])) {
-      this.correctAnswer();
+      this.correctAnswer(this.activeQuestion);
       cardElement.classList.add('disabled');
     } else {
-      this.wrongAnswer();
+      this.wrongAnswer(this.activeQuestion);
     }
 
     return this;
   }
 
-  correctAnswer() {
+  correctAnswer(cardObj) {
     this.appControl.playAppSound('correct');
     this.correctAnswers += 1;
+    this.appControl.stat.storage.add('correct', cardObj);
     this.liveCorrectPrElement.innerHTML = this.correctAnswers;
     this.liveIndicatorElement.append(new Star().element);
     setTimeout(() => {
@@ -158,9 +159,10 @@ class gameControl {
     return this;
   }
 
-  wrongAnswer() {
+  wrongAnswer(cardObj) {
     this.appControl.playAppSound('wrong');
     this.wrongAnswers += 1;
+    this.appControl.stat.storage.add('wrong', cardObj);
     this.liveWrongPrElement.innerHTML = this.wrongAnswers;
     this.liveIndicatorElement.append(new Star('wrong').element);
     return this;
