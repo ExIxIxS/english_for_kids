@@ -5,6 +5,10 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-undef */
 
+import {
+  createCustomElement,
+} from './commonFunct';
+
 export default class MenuElement {
   constructor(topicsArr, startMenu = 'Main page', endMenu = 'Statistic') {
     this.openedMenuCollections = [
@@ -37,8 +41,11 @@ export default class MenuElement {
     this.topicsArr.forEach((topicName) => ulElement.append(createLi(topicName)));
     ulElement.append(createLi(this.endMenu));
 
-    const menuElement = document.createElement('nav');
-    menuElement.className = 'menu';
+    const buttonTemplate = `
+                            <div class="button close-menu"></div>
+                            `;
+
+    const menuElement = createCustomElement('nav', 'menu', buttonTemplate);
     menuElement.append(ulElement);
     this.element = menuElement;
     return this;

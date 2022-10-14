@@ -64,7 +64,7 @@ class ContentContainer {
     this.topicsArr.forEach((topic, index) => {
       const cardObj = {
         cardName: topic,
-        image: this.cardsArr[index][0].image,
+        image: this.appControl.mainCards[index].image,
       };
       mainContainerElement.append(new Card(this.appControl, cardObj).element);
     });
@@ -158,7 +158,7 @@ class ContentContainer {
 
   getCardImageName(cardElement) {
     const imageSrc = cardElement.querySelector('.card-image').src;
-    const imageName = imageSrc.match(/(?<=\/)\w+(?=\.jpg)/)[0];
+    const imageName = imageSrc.match(/(?<=\/)\w+(?=\.png|.svg|.jpg|.jpeg|.gif)/)[0];
     return imageName;
   }
 

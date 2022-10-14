@@ -11,7 +11,6 @@ import Card from './card';
 
 import {
   createCustomElement,
-  //  getRandomInt,
 } from './commonFunct';
 
 class Statistic {

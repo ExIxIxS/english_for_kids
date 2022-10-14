@@ -59,9 +59,13 @@ function clickUserInteractive(event, appCtrlObj) {
 
     //  clicking on card
     case (targetClassList.some((className) => content.validCardClasses.includes(className))): {
+      let cardObj;
       cardElement = content.getCardElementByTarget(event.target);
-      const cardImageName = content.getCardImageName(cardElement);
-      const cardObj = content.getCardObjByImageName(cardImageName);
+
+      if (!cardElement.classList.contains('card-main-page')) {
+        const cardImageName = content.getCardImageName(cardElement);
+        cardObj = content.getCardObjByImageName(cardImageName);
+      }
 
       if (isGameMode && gameControl.isGameStarted && !cardElement.classList.contains('disabled')) {
         gameControl.processAnswer(cardObj, cardElement);

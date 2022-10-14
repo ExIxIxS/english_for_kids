@@ -10,9 +10,10 @@ import GameControl from './gameControl';
 import Statistic from './statistic';
 
 class AppControl {
-  constructor(topicsArr, cardsArr) {
+  constructor(topicsArr, cardsArr, mainCards) {
     this.topicsArr = topicsArr;
     this.cardsArr = cardsArr;
+    this.mainCards = mainCards;
 
     this.menu = new MenuElement(this.topicsArr)
       .addToDoc();

@@ -4,6 +4,7 @@
 /* eslint-disable no-console */
 /* eslint-disable linebreak-style */
 /* eslint-disable no-undef */
+
 import Star from './star';
 import {
   createCustomElement,
@@ -36,9 +37,8 @@ class gameControl {
     const classNames = 'game-controls inactive';
     const template = `
                     <div class="button game-button start-button">
-                      Button
                     </div>
-                    <div class="game-progress">
+                    <div class="game-progress inactive">
                       <div class="game-indicator">
                       </div>
                       <p class="game-score">
@@ -71,7 +71,13 @@ class gameControl {
     return this;
   }
 
-  showGameStat() {
+  showGameProgress() {
+    document.querySelector('.game-progress').classList.remove('inactive');
+    return this;
+  }
+
+  hideGameProgress() {
+    document.querySelector('.game-progress').classList.add('inactive');
     return this;
   }
 
@@ -89,7 +95,7 @@ class gameControl {
     this.isGameStarted = true;
     this.correctAnswers = 0;
     this.wrongAnswers = 0;
-    this.showGameStat(); //  isn`t written
+    this.showGameProgress();
     this.createRandomQuestionsBundle(arrOptions);
     this.askQuestion();
     this.changeButtonClass('repeat-button');
@@ -99,6 +105,7 @@ class gameControl {
   endGame() {
     this.isGameStarted = false;
     this.activeQuestion = null;
+    this.hideGameProgress();
     this.changeButtonClass('start-button');
 
     if (this.correctAnswers === this.appControl.content.gameCardsCollection.length

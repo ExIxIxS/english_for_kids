@@ -35,19 +35,12 @@ const config = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+        test: /\.(eot|ttf|woff|woff2)$/i,
         type: 'asset',
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'assets/img',
-            },
-          },
-        ],
+        type: 'asset/resource',
       },
       // more about loaders from https://webpack.js.org/loaders/
     ],
