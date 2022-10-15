@@ -67,7 +67,7 @@ class Statistic {
                             <td>${wordObj.trainClick}</th>
                             <td>${wordObj.correctAnswers}</th>
                             <td>${wordObj.mistakes}</th>
-                            <td>${wordObj.percentage} %</th>
+                            <td>${wordObj.percentage}&nbsp;%</th>
                           </tr>
                           `;
       tableBodyInner += rowTemplate;

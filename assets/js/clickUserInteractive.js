@@ -52,7 +52,7 @@ function clickUserInteractive(event, appCtrlObj) {
     }
 
     //  clicking on card flip button
-    case (event.target.parentElement.classList.contains('card-flip-button')):
+    case (targetClassList.includes('card-flip-button')):
       cardElement = content.getCardElementByTarget(event.target);
       content.flipCard(cardElement);
       break;

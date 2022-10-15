@@ -18,10 +18,10 @@ class ContentContainer {
     this.validTypes = ['main page', 'topic', 'statistic', 'train diff'];
     this.validCardClasses = ['card', 'card-content', 'card-text', 'card-graphic', 'card-image'];
     this.type = this.getValidType(type);
+    [this.headerElement] = document.getElementsByClassName('container-centered');
     this.cardsCollection = null;
     this.gameCatdsCollection = null;
     this.element = null;
-
     this.build();
   }
 
@@ -46,11 +46,17 @@ class ContentContainer {
         contentElement = this.createMainCardsContainer();
         break;
       case 'topic': {
-        contentElement = this.createTopicCardsContainer();
+        contentElement = this.createTopicCardsContent();
         break;
       }
       default:
         break;
+    }
+
+    if (this.type === 'main page') {
+      this.headerElement.classList.add('main-page');
+    } else {
+      this.headerElement.classList.remove('main-page');
     }
 
     contentWrapper.append(contentElement);
@@ -72,18 +78,23 @@ class ContentContainer {
     return mainContainerElement;
   }
 
-  createTopicCardsContainer() {
+  createTopicCardsContent() {
+    const contentFragment = new DocumentFragment();
     const cardsContainerElement = createCustomElement('div', 'card-container');
     const cardIndex = this.topicsArr.findIndex((item) => {
       const result = item.toLowerCase() === this.appControl.activePage;
       return result;
     });
+    const topicName = this.topicsArr[cardIndex];
 
     this.cardsArr[cardIndex].forEach((cardObj) => {
       cardsContainerElement.append(new Card(this.appControl, cardObj, this.type).element);
     });
 
-    return cardsContainerElement;
+    contentFragment.append(createCustomElement('h2', 'topic-name', topicName));
+    contentFragment.append(cardsContainerElement);
+
+    return contentFragment;
   }
 
   addToDoc() {

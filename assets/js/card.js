@@ -34,7 +34,6 @@ class Card {
                         </div>
                         <p class="card-text">${cardObj.word}</p>
                         <div class="button card-flip-button">
-                            <span class="material-symbols-outlined">flip_camera_android</span>
                         </div>
                     </div>
                     `;
