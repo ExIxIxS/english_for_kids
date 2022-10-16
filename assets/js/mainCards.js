@@ -24,6 +24,14 @@ const mainCards = [
     topic: 'Emotions',
     image: 'img/app/main-006.png',
   },
+  {
+    topic: 'Food',
+    image: 'img/app/main-007.png',
+  },
+  {
+    topic: 'Geography',
+    image: 'img/app/main-008.png',
+  },
 ];
 
 export default mainCards;

@@ -136,6 +136,7 @@ header .header-image {
 h1 {
     text-align: center;
     font-family: 'Gloria Hallelujah', cursive;
+    text-shadow: 0px 0px 5px #7ed3ff;
 }
 
 .button:hover {
@@ -177,6 +178,10 @@ h1 {
     border: 2px var(--color-font-1) solid;
 }
 
+.switch.disabled:hover {
+    cursor: not-allowed;
+}
+
 .switch-rail {
     position: absolute;
     left: 0;
@@ -191,7 +196,7 @@ h1 {
     position: absolute;
     left: 0;
     border-radius: inherit;
-    background-color: #3271a74d;
+    background-color: #79d1f330;
     z-index: 10;
     transition: left 0.7s;
     border: 1px var(--color-font-1) solid;
@@ -225,8 +230,19 @@ h1 {
 }
 
 .game-button.repeat-button {
-    background-color: #394cf5;
+    background-color: var(--color-font-1);
     background-image: url("../img/app/watercolor-button-repeat-01.png");
+}
+
+.repeat-button {
+    animation-name: rotation;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.repeat-button:hover {
+    background-image: url("../img/app/watercolor-button-repeat-02.png");
 }
 
 .game-progress {
@@ -245,6 +261,7 @@ h1 {
     align-items: center;
     background-color: #faf8fd;
     border: 1px var(--color-font-1) solid;
+    box-shadow: 0px 0px 10px #7ed3ff;
 }
 
 .star {
@@ -273,11 +290,11 @@ nav {
     background-color: var(--color-bg-main-1);
     z-index: 11;
     background-image: url("../img/app/watercolor-kytes-01.jpg"), url("../img/app/watercolor-buterfly-01.jpg");
-    background-size: 450px auto, 179px auto;
+    background-size: 450px auto, 144px auto;
     background-position: 0px 0px, 122px 100%;
     background-repeat: no-repeat, no-repeat;
     box-shadow: none;
-    transition-property: left, background-position, box-shadow;
+    transition-property: left, background-position, background-size, box-shadow;
     transition-duration: 1.2s,5s;
 }
 
@@ -303,7 +320,6 @@ nav.opened-menu {
     background-image: url("../img/app/watercolor-line-02-right.png");
     background-size: 100% 100%;
     color: white;
-    padding: 15px 0;
 }
 
 .menu-list li:nth-child(even):hover {
@@ -484,6 +500,7 @@ h2.topic-name {
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .stat-table {
@@ -497,15 +514,6 @@ thead {
     background-color: aliceblue;
 }
 
-th {
-    height: 30px;
-}
-
-tr {
-    height: 25px;
-    background-color: azure;
-}
-
 th, td {
     padding: 0 4px;
     border: 1px solid black;
@@ -513,20 +521,33 @@ th, td {
     vertical-align: middle;
 }
 
+th {
+    height: 40px;
+    position: relative;
+    font-size: 22px;
+    background-color: var(--color-bg-main-1);
+    border: none;
+}
+
+tr {
+    height: 25px;
+    background-color: var(--color-bg-main-1);
+}
+
+th.sorted {
+    padding: 0 24px 0 4px;
+}
+
 tr:nth-child(even) {
-    background-color: #fdfdde;
+    background-color: #e9f5ff;
 }
 
-.sorted-down, .sorted-up {
-    background-color: #d0fa81;
-}
-
-.sort-icon {
+img.sort-icon {
     width: 16px;
     height: auto;
-    position: relative;
-    left: 10px;
-    top: 2px;
+    position: absolute;
+    right: 15px;
+    top: 12px;
 }
 
 .stat-buttons-wrapper {
@@ -542,26 +563,42 @@ tr:nth-child(even) {
     margin: 20px 0;
     padding: 15px;
     border-radius: 50px;
-    border: 1px solid rgb(0, 0, 0);
     color: azure;
     text-align: center;
 }
 
 .button.train-diff {
-    background-color: rgb(7, 160, 96);
+    background-color: #07a060;
+    background-image: url("../img/app/watercolor-green-line-01.png");
+    background-size: 100% 100%;
+    text-shadow: 3px 3px 3px #07a060;
 }
 
 .button.reset-stat {
-    background-color: rgb(189, 45, 45);
+    background-color: #bd2d2d;
+    background-image: url("../img/app/watercolor-red-line-01.png");
+    background-size: 100% 100%;
+    text-shadow: 3px 3px 3px #bd2d2d;
 }
 
 .nothing-diff {
-    width: 100%;
+    width: 60%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+}
+
+.nothing-diff .graphic {
+    width: 60%;
 }
 
 .nothing-diff p {
-    position: absolute;
-    top: 20%;
+    color: #2a641a;
+    font-size: 4vw;
+    margin-bottom: 15px;
+    text-shadow: 2px 5px 5px #e4ebb5;
 }
 
 .disabled:hover {
@@ -601,6 +638,21 @@ tr:nth-child(even) {
     }
 }
 
+@media (max-width: 999px) {
+
+    img.sort-icon {
+        right: 5px;
+    }
+
+    .nothing-diff {
+        width: 100%;
+    }
+
+    .nothing-diff p {
+        font-size: 36px;
+    }
+}
+
 @media (max-width: 559px) {
     .main-controls {
         width: 100vw;
@@ -609,11 +661,21 @@ tr:nth-child(even) {
 
     .game-controls {
         justify-content: center;
+        box-shadow: 0px -15px 30px #7ed3ff;
     }
 
     .game-button {
         width: 70px;
         height: 70px;
+    }
+
+    .game-progress {
+        justify-content: flex-start;
+        margin: 0 0 0 10px;
+    }
+
+    .game-score {
+        margin: 0 0 0 10px;
     }
 
     h1 {
@@ -657,6 +719,12 @@ tr:nth-child(even) {
 
     .table-wrapper {
         width: 72%;
+    }
+}
+
+@media (max-height: 930px) {
+    nav {
+        background-size: 450px auto, 0 auto;
     }
 }
 

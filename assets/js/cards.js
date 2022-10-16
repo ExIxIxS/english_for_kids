@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 const cards = [
-  ['Action (set A)', 'Action (set B)', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotions'],
+  ['Action (set A)', 'Action (set B)', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotions', 'Food', 'Geography'],
   [
     {
       word: 'cry',
@@ -299,6 +299,118 @@ const cards = [
       translation: 'смех',
       image: 'img/laugh.jpg',
       audioSrc: 'audio/laugh.mp3',
+    },
+  ],
+  [
+    {
+      word: 'burger',
+      translation: 'бургер',
+      image: 'img/burger.jpg',
+      audioSrc: 'audio/en_burger.mp3',
+    },
+    {
+      word: 'cake',
+      translation: 'торт',
+      image: 'img/cake.jpg',
+      audioSrc: 'audio/en_cake.mp3',
+    },
+    {
+      word: 'croissant',
+      translation: 'круассан',
+      image: 'img/croissant.jpg',
+      audioSrc: 'audio/en_croissant.mp3',
+    },
+    {
+      word: 'hot dog',
+      translation: 'хот дог',
+      image: 'img/hot_dog.jpg',
+      audioSrc: 'audio/en_hot_dog.mp3',
+    },
+    {
+      word: 'lasagna',
+      translation: 'лазанья',
+      image: 'img/lasagna.jpg',
+      audioSrc: 'audio/en_lasagna.mp3',
+    },
+    {
+      word: 'omelette',
+      translation: 'омлет',
+      image: 'img/omelette.jpg',
+      audioSrc: 'audio/en_omelette.mp3',
+    },
+    {
+      word: 'pizza',
+      translation: 'пицца',
+      image: 'img/pizza.jpg',
+      audioSrc: 'audio/en_pizza.mp3',
+    },
+    {
+      word: 'sandwich',
+      translation: 'бутерброд',
+      image: 'img/sandwich.jpg',
+      audioSrc: 'audio/en_sandwich.mp3',
+    },
+    {
+      word: 'spaghetti',
+      translation: 'спагетти',
+      image: 'img/spaghetti.jpg',
+      audioSrc: 'audio/en_spaghetti.mp3',
+    },
+    {
+      word: 'sushi',
+      translation: 'суши',
+      image: 'img/sushi.jpg',
+      audioSrc: 'audio/en_sushi.mp3',
+    },
+  ],
+  [
+    {
+      word: 'coast',
+      translation: 'побережье',
+      image: 'img/coast.jpg',
+      audioSrc: 'audio/en_coast.mp3',
+    },
+    {
+      word: 'swamp',
+      translation: 'болото',
+      image: 'img/swamp.jpg',
+      audioSrc: 'audio/en_swamp.mp3',
+    },
+    {
+      word: 'river',
+      translation: 'река',
+      image: 'img/river.jpg',
+      audioSrc: 'audio/en_river.mp3',
+    },
+    {
+      word: 'island',
+      translation: 'остров',
+      image: 'img/island.jpg',
+      audioSrc: 'audio/en_island.mp3',
+    },
+    {
+      word: 'lake',
+      translation: 'озеро',
+      image: 'img/lake.jpg',
+      audioSrc: 'audio/en_lake.mp3',
+    },
+    {
+      word: 'iceberg',
+      translation: 'айсберг',
+      image: 'img/iceberg.jpg',
+      audioSrc: 'audio/en_iceberg.mp3',
+    },
+    {
+      word: 'mountain',
+      translation: 'гора',
+      image: 'img/mountain.jpg',
+      audioSrc: 'audio/en_mountain.mp3',
+    },
+    {
+      word: 'ocean',
+      translation: 'океан',
+      image: 'img/ocean.jpg',
+      audioSrc: 'audio/en_ocean.mp3',
     },
   ],
 ];

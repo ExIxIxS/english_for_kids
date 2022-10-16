@@ -8,7 +8,7 @@ class StatStorage {
   constructor(topicsArr, cardsArr) {
     this.topicsArr = topicsArr;
     this.cardsArr = cardsArr;
-    this.statArr = JSON.parse(localStorage.getItem('EnglishForKids') || []);
+    this.statArr = JSON.parse(localStorage.getItem('EnglishForKids'));
     if (!this.statArr) {
       this
         .build()

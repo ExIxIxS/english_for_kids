@@ -16,6 +16,16 @@ function clickUserInteractive(event, appCtrlObj) {
   let activeMenuElement;
 
   switch (true) {
+    //  clicking on page title
+    case (targetClassList.includes('app-title')):
+      if (document.querySelector('body').classList.contains('opened-menu')) {
+        menu.close();
+      } else {
+        appControl.changePage('main page');
+        appControl.switchObj.enable();
+      }
+      break;
+
     //  clicking on menu burger button
     case (targetClassList.includes('menu-button')):
       menu.toggle();

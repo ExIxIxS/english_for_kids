@@ -82,7 +82,7 @@ class Statistic {
       let imageHTML = '';
 
       if (this.sorted && (this.sortProperty === propName)) {
-        sortClassName = ` sorted-${this.sortType}`;
+        sortClassName = ` sorted sorted-${this.sortType}`;
         const imageName = (this.sortType === 'down') ? 'sort-asc' : 'sort-desc';
         imageHTML = `
                     <img class="sort-icon button sortable" src=../assets/icons/${imageName}.png alt="sort icon" width="51" height="51"></img>
@@ -124,9 +124,9 @@ class Statistic {
       case 0: {
         const template = `
                           <div class="graphic">
-                            <img src="../assets/img/app/super.png" alt="super result" width="753" height="553">
+                            <img src="../assets/img/app/watercolor-hero-01.png" alt="super result" width="753" height="553">
                           </div>
-                          <p>Nothing difficult!</p>
+                          <p>Nothing difficult is!</p>
                         `;
 
         resultElement = createCustomElement('div', 'nothing-diff', template);
