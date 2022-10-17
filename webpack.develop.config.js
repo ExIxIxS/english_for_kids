@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isProduction = false;
 
@@ -18,8 +19,18 @@ const config = {
       title: 'Webpack Development Output',
       template: 'src/index.html',
     }),
-    new FaviconsWebpackPlugin('./assets/icons/favicon.ico'),
+    new FaviconsWebpackPlugin('./src/assets/icons/favicon.ico'),
     new ESLintPlugin({ fix: true }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/assets/img/', to: './assets/img/' },
+        { from: 'src/assets/icons/', to: './assets/icons/' },
+        { from: 'src/assets/audio/', to: './assets/audio/' },
+      ],
+      options: {
+        concurrency: 100,
+      },
+    }),
 
     // more about plugins from https://webpack.js.org/configuration/plugins/
   ],

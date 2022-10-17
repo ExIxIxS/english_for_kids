@@ -1,6 +1,8 @@
+/* eslint-disable linebreak-style */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const config = {
   entry: { index: './src/index.js' },
@@ -14,7 +16,17 @@ const config = {
       title: 'Webpack Production Output',
       template: 'src/index.html',
     }),
-    new FaviconsWebpackPlugin('./assets/icons/favicon.ico'),
+    new FaviconsWebpackPlugin('./src/assets/icons/favicon.ico'),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/assets/img/', to: './assets/img/' },
+        { from: 'src/assets/icons/', to: './assets/icons/' },
+        { from: 'src/assets/audio/', to: './assets/audio/' },
+      ],
+      options: {
+        concurrency: 100,
+      },
+    }),
 
     // more about plugins from https://webpack.js.org/configuration/plugins/
   ],
@@ -30,19 +42,12 @@ const config = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+        test: /\.(eot|ttf|woff|woff2)$/i,
         type: 'asset',
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'assets/img',
-            },
-          },
-        ],
+        type: 'asset/resource',
       },
       // more about loaders from https://webpack.js.org/loaders/
     ],

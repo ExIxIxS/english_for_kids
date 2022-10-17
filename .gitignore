@@ -1,3 +1,3 @@
 questions.odt
-.babelrc
-node_modules/**
+develop
+prod
