@@ -749,6 +749,10 @@ img.sort-icon {
     .table-wrapper {
         width: 72%;
     }
+
+    .final-clip .graphic {
+        width: 70%;
+    }
 }
 
 @media (max-height: 930px) {
