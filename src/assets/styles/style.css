@@ -1,0 +1,768 @@
+/* gloria-hallelujah-regular - latin */
+@font-face {
+    font-family: 'Gloria Hallelujah';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('../fonts/gloria-hallelujah-v17-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../fonts/gloria-hallelujah-v17-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+
+/* neucha-regular - latin */
+@font-face {
+    font-family: 'Neucha';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('../fonts/neucha-v17-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../fonts/neucha-v17-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+
+/* border-box model for all elements */
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+/* --- Page color styling --- */
+
+:root {
+    --color-bg-main-1: #ffffff;
+    --color-bg-main-2: #dbf5f8;
+    --color-bg-main-3: #7ed3ff;
+    --color-bg-main-4: #07a060;
+    --color-bg-main-5: #bd2d2d;
+    --color-bg-main-6: #faf8fd;
+    --color-bg-table-1: #e9f5ff;
+    --color-font-1: #3070a6;
+    --color-font-2: #ff0000;
+    --color-font-3: #2a641a;
+}
+
+/* ---------------------------------- */
+
+body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-bg-main-1);
+    background-image: url("../img/app/watercolor-blue-bg-left.jpg"), url("../img/app/watercolor-blue-bg-right.jpg");
+    background-attachment: fixed;
+    background-position: left top, right bottom;
+    background-repeat: repeat-y;
+    background-size: 15% auto;
+    font-family: 'Neucha', cursive;
+    color: var(--color-font-1);
+}
+
+body.opened-menu {
+    overflow-y: hidden;
+}
+
+.graphic, img {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.container-centered {
+    max-width: 1440px;
+    min-width: 1440px;
+    margin: 0 auto;
+}
+
+header.container-centered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 8;
+    margin-top: 0;
+    transition: margin 1s;
+}
+
+header.main-page {
+    margin-top: 380px;
+}
+
+header .header-image {
+    width: 70%;
+    position: absolute;
+    top: -376px;
+}
+
+.main-controls {
+    width: 80%;
+    min-height: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 35px;
+    background-color: var(--color-bg-main-1);
+    background-image: url(../img/app/watercolor-waves-01-up.png), url(../img/app/watercolor-waves-01-down.png);
+    background-position: 100% 0, 0 100%;
+    background-repeat: repeat-x;
+    background-size: auto 28%;
+    z-index: 5;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Gloria Hallelujah', cursive;
+    text-shadow: 0px 0px 5px var(--color-bg-main-3);
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.menu-button {
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    background-image: url("../img/app/watercolor-menu-button-01.png");
+    background-size: cover;
+    transition: transform 1s;
+}
+
+.menu-button.opened-menu {
+    transform: rotate(180deg);
+}
+
+.button.close-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-image: url("../img/app/watercolor-red-cross-button-01.jpg");
+    background-size: cover;
+
+}
+
+.switch {
+    width: 110px;
+    background-color:var(--color-bg-main-6);
+    display: flex;
+    justify-content: space-between;
+    border-radius: 60px;
+    position: relative;
+    border: 2px var(--color-font-1) solid;
+}
+
+.switch.disabled {
+    filter: blur(1px);
+}
+
+.switch.disabled:hover {
+    cursor: not-allowed;
+}
+
+.switch-rail {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.switch-roller {
+    width: 55px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    border-radius: inherit;
+    background-color: #79d1f330;
+    z-index: 10;
+    transition: left 0.7s;
+    border: 1px var(--color-font-1) solid;
+}
+
+.switch.switch-on .switch-roller {
+    left: 53px;
+}
+
+.switch-trigger {
+    margin: 0 10px;
+    height: 40px;
+    z-index: 9;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 20px;
+}
+
+.game-controls {
+    width: 100vw;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--color-bg-main-1);
+    border-radius: 0;
+    background-image: url("../img/app/watercolor-blue-bg-left.jpg"), url("../img/app/watercolor-blue-bg-right.jpg");
+    background-attachment: fixed;
+    background-position: left top, right bottom;
+    background-repeat: repeat-y;
+    background-size: 15% auto;
+}
+
+.game-controls.inactive {
+    visibility: hidden;
+}
+
+
+.game-controls.inactive .game-button {
+    width: 0px;
+    height: 0px;
+    margin: 0px;
+}
+
+.game-button {
+    width: 100px;
+    height: 100px;
+    margin: 10px 0;
+    border-radius: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: 1s;
+}
+
+.game-button.start-button {
+    background-color: var(--color-bg-main-4);
+    background-image: url("../img/app/watercolor-button-start-01.png");
+}
+
+.game-button.repeat-button {
+    background-color: var(--color-font-1);
+    background-image: url("../img/app/watercolor-button-repeat-01.png");
+}
+
+.repeat-button {
+    animation-name: rotation;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.repeat-button:hover {
+    background-image: url("../img/app/watercolor-button-repeat-02.png");
+}
+
+.game-controls.inactive .game-progress {
+    visibility: hidden;
+}
+
+.game-controls.inactive .game-indicator {
+    height: 0;
+}
+
+.game-progress.inactive .game-indicator {
+    height: 5px;
+}
+
+.game-progress {
+    width: 220px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.game-indicator {
+    width: 150px;
+    height: 40px;
+    border-radius: 18px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--color-bg-main-6);
+    border: 1px var(--color-font-1) solid;
+    box-shadow: 0px 0px 10px var(--color-bg-main-3);
+    transition: height 1s;
+}
+
+.star {
+    width: 30px;
+}
+
+.game-score {
+    text-align: center;
+}
+
+.game-score .correct {
+    color: var(--color-font-3);
+}
+
+.game-score .wrong {
+    color: var(--color-font-2);
+}
+
+nav {
+    left: -320px;
+    position: fixed;
+    top: 0;
+    width: 320px;
+    height: 100%;
+    overflow-y: auto;
+    background-color: var(--color-bg-main-1);
+    z-index: 11;
+    background-image: url("../img/app/watercolor-kytes-01.jpg"), url("../img/app/watercolor-buterfly-01.jpg");
+    background-size: 450px auto, 144px auto;
+    background-position: 0px 0px, 122px 100%;
+    background-repeat: no-repeat, no-repeat;
+    box-shadow: none;
+    transition-property: left, background-position, background-size, box-shadow;
+    transition-duration: 1.2s,5s;
+}
+
+nav.opened-menu {
+    left: 0;
+    box-shadow: 0px 0 20px 1px #94ca68, 0px 0 80px 20px #f0e080, 50px 0 250px 50px var(--color-font-1);
+}
+
+.menu-list {
+    height: 500px;
+    margin-top: calc(50vh - 250px);
+}
+
+.menu-list li {
+    padding: 10px 0;
+    text-align: center;
+    font-size: 2em;
+    background-color: var(--color-bg-main-1);
+}
+
+.menu-list li:hover {
+    background-color: var(--color-bg-main-2);
+    background-image: url("../img/app/watercolor-line-02-right.png");
+    background-size: 100% 100%;
+    color: var(--color-bg-main-1);
+}
+
+.menu-list li:nth-child(even):hover {
+    background-color: var(--color-bg-main-2);
+    background-image: url("../img/app/watercolor-line-02.png");
+}
+
+.menu-list li.active-page, .menu-list li.active-page:hover {
+    background-color: var(--color-bg-main-2);
+    background-image: url("../img/app/watercolor-line-01.png");
+    background-size: 100% 100%;
+    color: var(--color-bg-main-1);
+    padding: 15px 0;
+}
+
+main.container-centered {
+    margin-top: 20px;
+    padding-bottom: 35px;
+}
+
+.content-wrapper {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2.topic-name {
+    font-size: 34px;
+    margin: 5px 0 20px 0;
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 78%;
+    margin: auto;
+}
+
+.card {
+    margin: 15px;
+    position: relative;
+}
+
+.card-main-page {
+    width: 256px;
+    height: 240px;
+    margin-top: 20px;
+    padding: 45px;
+    border-radius: 50%;
+    background-color: var(--color-bg-main-1);
+    background-image: url("../img/app/watercolor-blue-card-bg-01.jpg");
+    background-size: 100% 83%;
+    background-repeat: no-repeat;
+}
+
+.card-main-page:hover {
+    border-radius: 25%;
+    background-image: url("../img/app/watercolor-blue-card-bg-02.jpg");
+}
+
+.card-topic {
+    width: 226px;
+    height: 270px;
+}
+
+.card.disabled {
+    filter: blur(3px);
+}
+
+.card-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.card-topic .card-content {
+    border: 2px var(--color-font-1) solid;
+    box-shadow: 0 0 15px 1px var(--color-font-1);
+}
+
+.card-topic .card-content:hover {
+    box-shadow: 0 0 15px 3px var(--color-font-1);
+}
+
+.card.disabled .card-content {
+    box-shadow: none;
+}
+
+.card-main-page .card-content, .card-main-page img {
+    border-radius: 50px;
+}
+
+.card-content, .card-content img {
+    transition: border-radius 1s;
+}
+
+.card-topic .card-content {
+    border-radius: 50px 0;
+}
+
+.card-topic.flipped .card-content {
+    border-radius: 0 50px;
+}
+
+.card-topic img {
+    border-radius: 50px 0 0 0;
+}
+
+.card-topic.flipped img {
+    border-radius: 0 50px 0 0;
+}
+
+.card p {
+    margin-top: 15px;
+    font-size: 32px;
+    text-align: center;
+}
+
+.card-main-page p {
+    position: relative;
+    top: 32px;
+    border-radius: 20px;
+    font-size: 32px;
+}
+
+.card-flip-button {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    background-image: url("../img/app/watercolor-flip-button-01.png");
+    background-size: cover;
+}
+
+.card-flip-button:hover {
+    animation-name: rotation;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.flipped .card-content {
+    animation-name: flip-card;
+    animation-duration: 1s;
+}
+
+.unflipped .card-content {
+    animation-name: unflip-card;
+    animation-duration: 1s;
+}
+
+.final-clip {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.final-clip p {
+    color: var(--color-font-2);
+    font-size: 36px;
+    margin-top: 30px;
+}
+
+.stat-container {
+    width: 74%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.stat-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.5em;
+
+}
+
+th, td {
+    padding: 0 4px;
+    border: 1px solid #000000;
+    text-align: center;
+    vertical-align: middle;
+}
+
+th {
+    height: 40px;
+    position: relative;
+    font-size: 22px;
+    background-color: var(--color-bg-main-1);
+    border: none;
+}
+
+tr {
+    height: 25px;
+    background-color: var(--color-bg-main-1);
+}
+
+th.sorted {
+    padding: 0 24px 0 4px;
+}
+
+tr:nth-child(even) {
+    background-color: var(--color-bg-table-1);
+}
+
+img.sort-icon {
+    width: 16px;
+    height: auto;
+    position: absolute;
+    right: 15px;
+    top: 12px;
+}
+
+.stat-buttons-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.stat-button {
+    width: 300px;
+    height: 70px;
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 50px;
+    color: azure;
+    text-align: center;
+}
+
+.button.train-diff {
+    background-color: var(--color-bg-main-4);
+    background-image: url("../img/app/watercolor-green-line-01.png");
+    background-size: 100% 100%;
+    text-shadow: 3px 3px 3px var(--color-bg-main-4);
+}
+
+.button.reset-stat {
+    background-color: var(--color-bg-main-5);
+    background-image: url("../img/app/watercolor-red-line-01.png");
+    background-size: 100% 100%;
+    text-shadow: 3px 3px 3px var(--color-bg-main-5);
+}
+
+.nothing-diff {
+    width: 60%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+}
+
+.nothing-diff .graphic {
+    width: 60%;
+}
+
+.nothing-diff p {
+    color: var(--color-font-3);
+    font-size: 4vw;
+    margin-bottom: 15px;
+    text-shadow: 2px 5px 5px #e4ebb5;
+}
+
+.disabled:hover {
+    cursor:auto;
+}
+
+/* --- Animation --- */
+
+@keyframes flip-card {
+    0% {}
+    50% {transform: rotateY(89deg)}
+}
+
+@keyframes unflip-card {
+    0% {}
+    50% {transform: rotateY(89deg)}
+}
+
+@keyframes rotation {
+    0% {}
+    100% {transform: rotate(360deg)}
+}
+
+/* --- RESPONSIVE LAYOUTS --- */
+
+@media (max-width: 1439px) {
+    .container-centered {
+        min-width: calc(1440vw*100/1440 - 20px);
+    }
+
+    header.main-page {
+        margin-top:  calc(380vw*100/1440);
+    }
+
+    header .graphic {
+        top: calc(-370vw*100/1440 + 5px);
+    }
+}
+
+@media (max-width: 999px) {
+
+    img.sort-icon {
+        right: 5px;
+    }
+
+    .nothing-diff {
+        width: 100%;
+    }
+
+    .nothing-diff p {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 559px) {
+    .main-controls {
+        width: 100vw;
+        border-radius: 0;
+    }
+
+    .game-controls {
+        justify-content: center;
+        box-shadow: 0px -15px 30px var(--color-bg-main-3);
+    }
+
+    .game-button {
+        width: 70px;
+        height: 70px;
+        margin-left: 22px;
+    }
+
+    .game-progress {
+        justify-content: flex-start;
+        margin: 0 0 0 10px;
+    }
+
+    .game-score {
+        margin: 0 0 0 10px;
+    }
+
+    h1 {
+        max-width: 75px;
+        font-size: 24px;
+    }
+
+    h2.topic-name {
+        font-size: 32px;
+        margin: 0 0 10px 0;
+    }
+
+    .card-main-page {
+        width: 230px;
+        height: 220px;
+        margin: 10px 0;
+    }
+
+    .card-main-page p {
+        font-size: 28px;
+    }
+
+    .stat-buttons-wrapper {
+        width: 78%;
+    }
+
+    .stat-button {
+        width: 190px;
+        height: 52px;
+        font-size: 21px;
+        margin: 5px 0;
+    }
+
+    main.container-centered {
+        width: 100vw;
+    }
+
+    .stat-container {
+        width: 100%;
+    }
+
+    .table-wrapper {
+        width: 72%;
+    }
+
+    .final-clip .graphic {
+        width: 70%;
+    }
+}
+
+@media (max-height: 930px) {
+    nav {
+        background-size: 450px auto, 0 auto;
+    }
+}
+
+@media (max-height: 970px) {
+    .menu-list {
+        margin-top: 235px;
+    }
+}
