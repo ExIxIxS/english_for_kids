@@ -1,10 +1,10 @@
-/* eslint-disable linebreak-style */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
-const config = {
+module.exports = {
+  mode: 'production',
   entry: { index: './src/index.js' },
   output: {
     filename: '[name].[contenthash].js',
@@ -16,7 +16,6 @@ const config = {
       title: 'Webpack Production Output',
       template: 'src/index.html',
     }),
-    new FaviconsWebpackPlugin('./src/assets/icons/favicon.ico'),
     new CopyWebpackPlugin({
       patterns: [
         { from: 'src/assets/img/', to: './assets/img/' },
@@ -52,14 +51,8 @@ const config = {
       // more about loaders from https://webpack.js.org/loaders/
     ],
   },
-};
-
-const isProduction = true;
-module.exports = () => {
-  if (isProduction) {
-    config.mode = 'production';
-  } else {
-    config.mode = 'development';
-  }
-  return config;
+  optimization: {
+    minimizer: [new TerserPlugin()],
+    minimize: true,
+  },
 };

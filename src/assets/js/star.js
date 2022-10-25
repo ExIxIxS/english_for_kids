@@ -1,5 +1,3 @@
-/* eslint-disable linebreak-style */
-
 import { createCustomElement } from './commonFunct';
 
 class Star {

@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-undef */
-
 import MenuElement from './menu';
 import ContentContainer from './content';
 import SwitchElement from './switch';
@@ -37,7 +34,9 @@ class AppControl {
   }
 
   set activePage(value) {
-    this.menu.activePage = value;
+    if (value) {
+      this.menu.activePage = value.toLowerCase();
+    }
   }
 
   get activeMode() {
@@ -45,7 +44,9 @@ class AppControl {
   }
 
   set activeMode(value) {
-    this.switchObj.activeMode = value;
+    if (value) {
+      this.switchObj.activeMode = value;
+    }
   }
 
   get activeArrCardsObj() {
@@ -54,7 +55,9 @@ class AppControl {
   }
 
   set activeArrCardsObj(arrCardsObj) {
-    this.activeArrCardsObj = arrCardsObj;
+    if (value) {
+      this.activeArrCardsObj = arrCardsObj;
+    }
   }
 
   changePage(pageName) {
