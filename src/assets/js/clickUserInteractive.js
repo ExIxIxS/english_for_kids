@@ -1,8 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable prefer-destructuring */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
-/* eslint-disable no-undef */
+const bodyElement = document.querySelector('body');
 
 function clickUserInteractive(event, appCtrlObj) {
   const appControl = appCtrlObj;
@@ -18,7 +14,7 @@ function clickUserInteractive(event, appCtrlObj) {
   switch (true) {
     //  clicking on page title
     case (targetClassList.includes('app-title')):
-      if (document.querySelector('body').classList.contains('opened-menu')) {
+      if (bodyElement.classList.contains('opened-menu')) {
         menu.close();
       } else {
         appControl.changePage('main page');
@@ -32,7 +28,7 @@ function clickUserInteractive(event, appCtrlObj) {
       break;
 
     //  clicking anywhere else when burger menu opened
-    case (document.querySelector('body').classList.contains('opened-menu') && !targetClassList.includes('menu')):
+    case (bodyElement.classList.contains('opened-menu') && !targetClassList.includes('menu')):
       menu.close();
       if (targetClassList.includes('menu-item')) {
         activeMenuElement = event.target;

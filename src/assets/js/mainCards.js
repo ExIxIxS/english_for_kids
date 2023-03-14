@@ -1,5 +1,3 @@
-/* eslint-disable linebreak-style */
-
 const mainCards = [
   {
     topic: 'Action (set A)',

@@ -1,7 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-undef */
-
-import './assets/styles/reset.css';
 import './assets/styles/normalize.css';
 import './assets/styles/style.css';
 

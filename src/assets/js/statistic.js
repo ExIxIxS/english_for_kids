@@ -1,7 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-undef */
-
 import StatStorage from './statStorage';
 import Card from './card';
 
@@ -37,8 +33,8 @@ class Statistic {
 
     const template = `
                       <div class="stat-buttons-wrapper">
-                        <div class="button stat-button train-diff">Train difficult words</div>
-                        <div class="button stat-button reset-stat">Reset stats</div>
+                        <button class="button stat-button train-diff" type="button">Train difficult words</button>
+                        <button class="button stat-button reset-stat" type="button">Reset stats</button>
                       </div>
                     `;
 

@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-undef */
-
 import { createCustomElement } from './commonFunct';
 
 class Switch {

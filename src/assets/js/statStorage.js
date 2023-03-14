@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-undef */
-
 class StatStorage {
   constructor(topicsArr, cardsArr) {
     this.topicsArr = topicsArr;

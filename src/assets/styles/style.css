@@ -28,6 +28,18 @@ html {
     box-sizing: inherit;
 }
 
+/* --- local reset --- */
+
+a {text-decoration:none; color:inherit; cursor:pointer;}
+button {background-color:transparent; color:inherit; border-width:0; padding:0; cursor:pointer;}
+figure {margin:0;}
+input::-moz-focus-inner {border:0; padding:0; margin:0;}
+ul, ol, dd {margin:0; padding:0; list-style:none;}
+h1, h2, h3, h4, h5, h6 {margin:0; font-size:inherit; font-weight:inherit;}
+p {margin:0;}
+cite {font-style:normal;}
+fieldset {border-width:0; padding:0; margin:0;}
+
 /* --- Page color styling --- */
 
 :root {
@@ -64,6 +76,11 @@ body.opened-menu {
     overflow-y: hidden;
 }
 
+button {
+    border: 0px;
+    background-color: var(--color-bg-main-1);
+}
+
 .graphic, img {
     width: 100%;
     height: auto;
@@ -73,7 +90,7 @@ body.opened-menu {
 
 .container-centered {
     max-width: 1440px;
-    min-width: 1440px;
+    min-width: 1420px;
     margin: 0 auto;
 }
 
@@ -97,7 +114,7 @@ header.main-page {
 header .header-image {
     width: 70%;
     position: absolute;
-    top: -376px;
+    top: -370px;
 }
 
 .main-controls {
@@ -118,6 +135,7 @@ header .header-image {
 h1 {
     text-align: center;
     font-family: 'Gloria Hallelujah', cursive;
+    font-size: 32px;
     text-shadow: 0px 0px 5px var(--color-bg-main-3);
 }
 
@@ -218,6 +236,7 @@ h1 {
 
 .game-controls.inactive {
     visibility: hidden;
+    width: 0;
 }
 
 
@@ -456,11 +475,11 @@ h2.topic-name {
 }
 
 .card-topic img {
-    border-radius: 50px 0 0 0;
+    border-radius: 48px 0 0 0;
 }
 
 .card-topic.flipped img {
-    border-radius: 0 50px 0 0;
+    border-radius: 0 48px 0 0;
 }
 
 .card p {
@@ -755,14 +774,12 @@ img.sort-icon {
     }
 }
 
-@media (max-height: 930px) {
-    nav {
-        background-size: 450px auto, 0 auto;
-    }
-}
-
 @media (max-height: 970px) {
     .menu-list {
         margin-top: 235px;
+    }
+
+    nav {
+        background-size: 450px auto, 0 auto;
     }
 }

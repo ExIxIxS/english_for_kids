@@ -1,7 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-undef */
-
 import Card from './card';
 import { createCustomElement } from './commonFunct';
 
@@ -13,7 +9,7 @@ class ContentContainer {
     this.type = this.getValidType(type);
     [this.headerElement] = document.getElementsByClassName('container-centered');
     this.cardsCollection = null;
-    this.gameCatdsCollection = null;
+    this.gameCardsCollection = null;
     this.element = null;
     this.build();
   }
@@ -163,7 +159,7 @@ class ContentContainer {
 
   getCardImageName(cardElement) {
     const imageSrc = cardElement.querySelector('.card-image').src;
-    const imageName = imageSrc.match(/(?<=\/)\w+(?=\.png|.svg|.jpg|.jpeg|.gif)/)[0];
+    const [imageName] = imageSrc.match(/(?<=\/)\w+(?=\.png|.svg|.jpg|.jpeg|.gif)/);
     return imageName;
   }
 

@@ -1,8 +1,4 @@
-/* eslint-disable linebreak-style */
 /* eslint-disable consistent-return */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-undef */
-
 import {
   createCustomElement,
 } from './commonFunct';
@@ -40,7 +36,7 @@ export default class MenuElement {
     ulElement.append(createLi(this.endMenu));
 
     const buttonTemplate = `
-                            <div class="button close-menu"></div>
+                            <button class="button close-menu" type="button"></button>
                             `;
 
     const menuElement = createCustomElement('nav', 'menu', buttonTemplate);

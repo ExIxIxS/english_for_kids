@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-undef */
-
 import Star from './star';
 import {
   createCustomElement,
@@ -32,8 +29,8 @@ class gameControl {
   build() {
     const classNames = 'game-controls inactive';
     const template = `
-                    <div class="button game-button start-button">
-                    </div>
+                    <button class="button game-button start-button" type="button">
+                    </button>
                     <div class="game-progress inactive">
                       <div class="game-indicator">
                       </div>
