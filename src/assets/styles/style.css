@@ -90,7 +90,7 @@ button {
 
 .container-centered {
     max-width: 1440px;
-    min-width: 1440px;
+    min-width: 1420px;
     margin: 0 auto;
 }
 
@@ -114,7 +114,7 @@ header.main-page {
 header .header-image {
     width: 70%;
     position: absolute;
-    top: -376px;
+    top: -370px;
 }
 
 .main-controls {
@@ -236,6 +236,7 @@ h1 {
 
 .game-controls.inactive {
     visibility: hidden;
+    width: 0;
 }
 
 
